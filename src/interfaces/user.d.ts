@@ -2,8 +2,8 @@ import { StatusUser } from '../utils/enums'
 
 export interface User {
     username: String
-    firstname: String
-    lastname: String
+    firstname?: String
+    lastname?: String
     email: String
     password: string
     avatar?: string

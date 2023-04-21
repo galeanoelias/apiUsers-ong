@@ -13,11 +13,11 @@ const userSchema = new mongoose.Schema<IUserDocument>(
       },
       firstname: {
         type: String,
-        required: true
+        required: false
       },
       lastname: {
         type: String,
-        required: true
+        required: false
       },
       email: {
         type: String,
