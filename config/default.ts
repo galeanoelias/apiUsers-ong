@@ -2,9 +2,9 @@ import dotenv from "dotenv";
 dotenv.config()
 
 export default {
-    port: process.env.PORT,
-    URI_DB: process.env.URI_DB,
-    DB_NAME: process.env.DB_NAME,
+    port: <string>process.env.PORT,
+    URI_DB: <string>process.env.URI_DB,
+    DB_NAME: <string>process.env.DB_NAME,
 };
 
 export const CLOUDINARY_CLOUD_NAME = <string>process.env["CLOUDINARY_USER_NAME"];
