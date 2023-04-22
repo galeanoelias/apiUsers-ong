@@ -19,18 +19,12 @@ const tz = process.env.TZ;
 const whiteList = [process.env.ORIGIN1]
 console.log(whiteList);
 // Cors
-app.use(cors({
-    origin: function(origin, callback){
-        console.log("Conectando=>", origin);
-        if (!origin || whiteList.includes(origin)) {
-            return callback(null, origin);
-        }
-        return "Error de CORS origin: " + origin + " No autorizado!";
-    },
-    credentials: true,
+app.use(
+    cors({
+        origin: '*',
+        credentials: true,
     })
-);
-
+)
 //middlewares
 app.use(express.static("public"));
 app.use(morgan("dev"));
@@ -40,9 +34,11 @@ app.use(cookieParser());
 
 //routes
 import userRoutes from "./routes/user.routes";
+import ongRoutes from "./routes/ong.routes";
 
 app.use("/docs/api/v1", swaggerUI.serve, swaggerUI.setup(specs));
 app.use("/auth/user", userRoutes);
+app.use("/auth/ong", ongRoutes);
 
 
 const port = config.get<number>("port");

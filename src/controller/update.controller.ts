@@ -36,4 +36,4 @@ export const updateUserById = async (req: any, res: Response) => {
         console.log(error);
         return res.status(500).json({ error: "Error of server! "})
     }
-  };
+};

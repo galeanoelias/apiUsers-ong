@@ -21,6 +21,10 @@ const options = {
         {
           name: "User",
           description: "Operations about user"
+        },
+        {
+          name: "Ong",
+          description: "Operations about ong"
         }
       ],
       paths: {
@@ -115,6 +119,81 @@ const options = {
                   "application/xml": {
                     schema: {
                       $ref: "#/components/schemas/User"
+                    }
+                  }
+                }
+              },
+              400: {
+                description: "Invalid username supplied"
+              },
+              404: {
+                description: "User not found"
+              }
+            }
+          }
+        },
+        "/auth/user/login": {
+          post: {
+            security: [
+              {
+                bearerAuth: [""]
+              }
+            ],
+            tags: [
+              "User"
+            ],
+            summary: "Login user",
+            description: "User Logued",
+            operationId: "loginUser",
+            requestBody: {
+              required: true,
+              content: {
+                "application/json": {
+                  schema: {
+                    $ref: "#/components/schemas/User/properties/email",
+                    $ref1: "#/components/schemas/User/properties/password"
+                  }
+                },
+                "multipart/form-data": {
+                  schema: {
+                    $ref: "#/components/schemas/User/properties/email",
+                    $ref1: "#/components/schemas/User/properties/password"
+                  }
+                },
+                "application/xml": {
+                  schema: {
+                    $ref: "#/components/schemas/User/properties/email",
+                    $ref1: "#/components/schemas/User/properties/password"
+                  }
+                },
+                "application/x-www-form-urlencoded": {
+                  schema: {
+                    $ref: "#/components/schemas/User/properties/email",
+                    $ref1: "#/components/schemas/User/properties/password"
+                  }
+                }
+              }
+            },
+            responses: {
+              200: {
+                description: "successful operation",
+                content: {
+                  "application/json": {
+                    schema: {
+                      $ref: "#/components/schemas/User/properties/email",
+                      $ref1: "#/components/schemas/User/properties/password"
+                    }
+                  },
+                  "multipart/form-data": {
+                    schema: {
+                      $ref: "#/components/schemas/User/properties/email",
+                      $ref1: "#/components/schemas/User/properties/password"
+                    }
+                  },
+                  "application/xml": {
+                    schema: {
+                      $ref: "#/components/schemas/User/properties/email",
+                      $ref1: "#/components/schemas/User/properties/password"
                     }
                   }
                 }
@@ -344,7 +423,417 @@ const options = {
               }
             }
           }
-        }
+        },
+        "/auth/ong/": {
+          get: {
+            tags: [
+              "Ong"
+            ],
+            summary: "GET all ongs in system",
+            responses: {
+              200: {
+                description: "Successful operation",
+                content: {
+                  "application/json": {
+                    schema: {
+                      $ref: "#/components/schemas/Ong"
+                    }
+                  },
+                  "application/xml": {
+                    schema: {
+                      $ref: "#/components/schemas/Ong"
+                    }
+                  }
+                }
+              },
+              405: {
+                description: "Invalid input"
+              }
+            },
+            security: [
+              {
+                userstore_auth: [
+                  "write:ong",
+                  "read:ong"
+                ]
+              }
+            ]
+          }
+        },
+        "/auth/ong/register": {
+          post: {
+            security: [
+            {
+              bearerAuth: [""]
+            }
+            ],
+            tags: [
+              "Ong"
+            ],
+            summary: "Create ong",
+            description: "Created ong object",
+            operationId: "createOng",
+            requestBody: {
+              required: true,
+              content: {
+                "application/json": {
+                  schema: {
+                    $ref: "#/components/schemas/Ong/properties/username",
+                    $ref1: "#/components/schemas/Ong/properties/email",
+                    $ref2: "#/components/schemas/Ong/properties/password"
+                  }
+                },
+                "multipart/form-data": {
+                  schema: {
+                    $ref: "#/components/schemas/Ong/properties/username",
+                    $ref1: "#/components/schemas/Ong/properties/email",
+                    $ref2: "#/components/schemas/Ong/properties/password"
+                  }
+                },
+                "application/xml": {
+                  schema: {
+                    $ref: "#/components/schemas/Ong/properties/username",
+                    $ref1: "#/components/schemas/Ong/properties/email",
+                    $ref2: "#/components/schemas/Ong/properties/password"
+                  }
+                },
+                "application/x-www-form-urlencoded": {
+                  schema: {
+                    $ref: "#/components/schemas/Ong/properties/username",
+                    $ref1: "#/components/schemas/Ong/properties/email",
+                    $ref2: "#/components/schemas/Ong/properties/password"
+                  }
+                }
+              }
+            },
+            responses: {
+              200: {
+                description: "successful operation",
+                content: {
+                  "application/json": {
+                    schema: {
+                      $ref: "#/components/schemas/Ong/properties/username",
+                      $ref1: "#/components/schemas/Ong/properties/email",
+                      $ref2: "#/components/schemas/Ong/properties/password"
+                    }
+                  },
+                  "multipart/form-data": {
+                    schema: {
+                      $ref: "#/components/schemas/Ong/properties/username",
+                      $ref1: "#/components/schemas/Ong/properties/email",
+                      $ref2: "#/components/schemas/Ong/properties/password"
+                    }
+                  },
+                  "application/xml": {
+                    schema: {
+                      $ref: "#/components/schemas/Ong/properties/username",
+                      $ref1: "#/components/schemas/Ong/properties/email",
+                      $ref2: "#/components/schemas/Ong/properties/password"
+                    }
+                  }
+                }
+              },
+              400: {
+                description: "Invalid username supplied"
+              },
+              404: {
+                description: "User not found"
+              }
+            }
+          }
+        },
+        "/auth/ong/login": {
+          post: {
+            security: [
+              {
+                bearerAuth: [""]
+              }
+            ],
+            tags: [
+              "Ong"
+            ],
+            summary: "Login Ong",
+            description: "Ong Logued",
+            operationId: "loginOng",
+            requestBody: {
+              required: true,
+              content: {
+                "application/json": {
+                  schema: {
+                    $ref: "#/components/schemas/Ong/email",
+                    $ref1: "#/components/schemas/Ong/password"
+                  }
+                },
+                "multipart/form-data": {
+                  schema: {
+                    $ref: "#/components/schemas/Ong/email",
+                    $ref1: "#/components/schemas/Ong/password"
+                  }
+                },
+                "application/xml": {
+                  schema: {
+                    $ref: "#/components/schemas/Ong/email",
+                    $ref1: "#/components/schemas/Ong/password"
+                  }
+                },
+                "application/x-www-form-urlencoded": {
+                  schema: {
+                    $ref: "#/components/schemas/Ong/email",
+                    $ref1: "#/components/schemas/Ong/password"
+                  }
+                }
+              }
+            },
+            responses: {
+              200: {
+                description: "successful operation",
+                content: {
+                  "application/json": {
+                    schema: {
+                      $ref: "#/components/schemas/Ong/email",
+                      $ref1: "#/components/schemas/Ong/password"
+                    }
+                  },
+                  "multipart/form-data": {
+                    schema: {
+                      $ref: "#/components/schemas/Ong/email",
+                      $ref1: "#/components/schemas/Ong/password"
+                    }
+                  },
+                  "application/xml": {
+                    schema: {
+                      $ref: "#/components/schemas/Ong/email",
+                      $ref1: "#/components/schemas/Ong/password"
+                    }
+                  }
+                }
+              },
+              400: {
+                description: "Invalid username supplied"
+              },
+              404: {
+                description: "Ong not found"
+              }
+            }
+          }
+        },
+        "/auth/ong/{id}": {
+          get: {
+            security: [
+              {
+              api_key: [""]
+              }
+            ],
+            tags: [
+              "Ong"
+            ],
+            summary: "Get ong by ong ID",
+            parameters: [
+              {
+                in: "path",
+                name: "id",
+                description: "The name that needs to be fetched. Use ong1 for testing.",
+                required: true,
+                schema: {
+                  type: String
+                }
+              },
+              {
+                name: "Authorization",
+                in: "header",
+                description: "Token",
+                required: true,
+                example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
+              }
+            ],
+            responses: {
+              200: {
+                description: "successful operation",
+                content: {
+                  "application/json": {
+                    schema: {
+                      $ref: "#/components/schemas/Ong"
+                    }
+                  },
+                  "application/xml": {
+                    schema: {
+                      $ref: "#/components/schemas/Ong"
+                    }
+                  }
+                }
+              },
+              400: {
+                description: "Invalid username supplied"
+              },
+              404: {
+                description: "Ong not found"
+              }
+            }
+          },
+          put: {
+            security: [
+              {
+              api_key: [""]
+              }
+            ],
+            tags: [
+              "Ong"
+            ],
+            summary: "Update ong",
+            description: "This can only be done by the logged in ong.",
+            parameters: [
+              {
+                in: "path",
+                name: "id",
+                description: "id that need to be update",
+                required: true,
+                schema: {
+                  type: String
+                }
+              },
+              {
+                name: "Authorization",
+                in: "header",
+                description: "Token",
+                required: true,
+                example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
+              }
+            ],
+            requestBody: {
+              required: true,
+              description: "Update an existent user in the store",
+              content: {
+                "application/json": {
+                  schema: {
+                    $ref: "#/components/schemas/Ong"
+                  }
+                },
+                "application/xml": {
+                  schema: {
+                    $ref: "#/components/schemas/Ong"
+                  }
+                },
+                "application/x-www-form-urlencoded": {
+                  schema: {
+                    $ref: "#/components/schemas/Ong"
+                  }
+                }
+              }
+            },
+            responses: {
+              200: {
+                description: "successful operation",
+                content: {
+                  "application/josn": {
+                    schema: {
+                      $ref: "#/components/schemas/Ong"
+                    }
+                  }
+                }
+              },
+              404: {
+                description: "Ong not found",
+                content: {
+                  "application/josn": {
+                    schema: {
+                      $ref: "#/components/schemas/Ong"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          delete: {
+            security: [
+              {
+              api_key: [""]
+              }
+            ],
+            tags: [
+              "Ong"
+            ],
+            summary: "Delete ong",
+            description: "This can only be done by the deletedd in ong.",
+            operationId: "deleteOng",
+            parameters: [
+              {
+                name: "id",
+                in: "path",
+                description: "The id that needs to be deleted",
+                required: true,
+                schema: {
+                  type: String
+                }
+              },
+              {
+                name: "Authorization",
+                in: "header",
+                description: "Token",
+                required: true,
+                example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
+              }
+            ],
+            requestBody: {
+              description: "Delete an existent ong in the store",
+              content: {
+                "application/json": {
+                  schema: {
+                    $ref: "#/components/schemas/Ong/properties/username",
+                    $ref2: "#/components/schemas/Ong/properties/email",
+                    $ref3: "#/components/schemas/Ong/properties/password"
+                  }
+                },
+                "application/xml": {
+                  schema: {
+                    $ref: "#/components/schemas/Ong/properties/username",
+                    $ref2: "#/components/schemas/Ong/properties/email",
+                    $ref3: "#/components/schemas/Ong/properties/password"
+                  }
+                },
+                "application/x-www-form-urlencoded": {
+                  schema: {
+                    $ref: "#/components/schemas/Ong/properties/username",
+                    $ref2: "#/components/schemas/Ong/properties/email",
+                    $ref3: "#/components/schemas/Ong/properties/password"
+                  }
+                }
+              },
+              required: true
+            },
+            responses: {
+              200: {
+                description: "successful operation",
+                content: {
+                  "application/josn": {
+                    schema: {
+                      $ref: "#/components/schemas/Ong"
+                    }
+                  }
+                }
+              },
+              400: {
+                description: "Invalid username supplied",
+                content: {
+                  "application/josn": {
+                    schema: {
+                      $ref: "#/components/schemas/Ong"
+                    }
+                  }
+                }
+              },
+              404: {
+                description: "User not found",
+                content: {
+                  "application/josn": {
+                    schema: {
+                      $ref: "#/components/schemas/Ong"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
       },
       components: {
         schemas: {
@@ -389,8 +878,7 @@ const options = {
             required: [
               "username",
               "email",
-              "password",
-              "avatar"
+              "password"
             ],
             properties: {
               username: {
@@ -436,6 +924,54 @@ const options = {
             },
             xml: {
               name: "user"
+            }
+          },
+          Ong: {
+            type: "object",
+            required: [
+              "username",
+              "email",
+              "password"
+            ],
+            properties: {
+              username: {
+                type: String,
+                required: true,
+                example: "OngsVoluntarie"
+              },
+              email: {
+                type: String,
+                required: true,
+                example: "voluntariado@voluntariado.com"
+              },
+              password: {
+                type: String,
+                required: true,
+                example: "12345aB!"
+              },
+              website: {
+                type: String,
+                required: false,
+                example: "www.tuOng.com.ar"
+              },
+              telephone: {
+                type: Number,
+                required: true,
+                example: "12345aB!"
+              },
+              about_me: {
+                type: String,
+                required: false,
+                example: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+              },
+              ong_types: {
+                type: String,
+                required: true,
+                example: "Unknown"
+              }
+            },
+            xml: {
+              name: "ong"
             }
           },
           ApiResponse: {

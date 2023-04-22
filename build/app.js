@@ -22,13 +22,7 @@ const whiteList = [process.env.ORIGIN1];
 console.log(whiteList);
 // Cors
 app.use((0, cors_1.default)({
-    origin: function (origin, callback) {
-        console.log("Conectando=>", origin);
-        if (!origin || whiteList.includes(origin)) {
-            return callback(null, origin);
-        }
-        return "Error de CORS origin: " + origin + " No autorizado!";
-    },
+    origin: '*',
     credentials: true,
 }));
 //middlewares
@@ -39,8 +33,10 @@ app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cookie_parser_1.default)());
 //routes
 const user_routes_1 = __importDefault(require("./routes/user.routes"));
+const ong_routes_1 = __importDefault(require("./routes/ong.routes"));
 app.use("/docs/api/v1", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDoc_1.specs));
 app.use("/auth/user", user_routes_1.default);
+app.use("/auth/ong", ong_routes_1.default);
 const port = config_1.default.get("port");
 app.set("port", port);
 exports.default = app;

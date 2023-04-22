@@ -11,8 +11,8 @@ const validateResult = (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-//User register
-export const authUserValidator = [
+//Ong register
+export const authOngValidator = [
   check("username")
     .exists()
     .withMessage("Username field is required")
@@ -23,22 +23,6 @@ export const authUserValidator = [
     .not()
     .isEmpty()
     .withMessage("Username cannot be empty"),
-
-  check("firstname")
-    .exists()
-    .withMessage("First name field is required")
-    .isLength({ min: 3 })
-    .withMessage("First name must have at least six (3) characters long")
-    .isLength({ max: 20 })
-    .withMessage("First name can't have more than twenty (20) characters"),
-
-  check("lastname")
-    .exists()
-    .withMessage("Last name field is required")
-    .isLength({ min: 3 })
-    .withMessage("Last name must have at least six (3) characters long")
-    .isLength({ max: 20 })
-    .withMessage("Last name can't have more than twenty (20) characters"),
   
   check("email")
     .exists()
@@ -70,14 +54,33 @@ export const authUserValidator = [
     .isEmpty()
     .withMessage("Password cannot be empty"),
 
-//   check("avatar")
-//     .exists()
-//     .withMessage("Img field is required")
-    // .isURL()
-    // .withMessage("Img must be a valid url")
-  //   .not()
-  //   .isEmpty()
-  //   .withMessage("Img cannot be empty"),
+  check("website")
+    .exists()
+    .withMessage("About Me field is required")
+    .isLength({ min: 0 })
+    .withMessage("About Me must have at least six (0) characters long")
+    .isLength({ max: 50 })
+    .withMessage("About Me can't have more than twenty (350) characters"),
+
+  check("telephone")
+    .exists()
+    .withMessage("About Me field is required")
+    .isLength({ min: 0 })
+    .withMessage("About Me must have at least six (0) characters long")
+    .isLength({ max: 20 })
+    .withMessage("About Me can't have more than twenty (350) characters")
+    .isStrongPassword({
+        minNumbers: 5
+    }),
+
+//  check("photo")
+//    .exists()
+//    .withMessage("Img field is required")
+// .isURL()
+// .withMessage("Img must be a valid url")
+//   .not()
+//   .isEmpty()
+//   .withMessage("Img cannot be empty"),
 
   check("about_me")
     .exists()
@@ -85,42 +88,12 @@ export const authUserValidator = [
     .isLength({ min: 0 })
     .withMessage("About Me must have at least six (0) characters long")
     .isLength({ max: 350 })
-    .withMessage("About Me can't have more than twenty (350) characters"),
+    .withMessage("About Me can't have more than twenty (350) characters")
+    .withMessage("About Me cannot be empty"),
 
-  // check("cv")
-  //   .exists()
-  //   .withMessage("Cv field is required")
-    // .isURL()
-    // .withMessage("Cv must be a valid url")
-  //   .not()
-  //   .isEmpty()
-  //   .withMessage("Cv cannot be empty"),
-
-  check("workfield")
-    .isIn(['Marketing', 'Tecnologia', 'Administracion', 'Unknown'])
-    .withMessage('Debe seleccionar un dato del listado'),
-
-  check("workingmodality")
+  check("ong_types")
     .isIn(['Presencial', 'Hibrido', 'Remoto', 'Unknown'])
     .withMessage('Debe seleccionar un dato del listado'),
-
-  // check("projects")
-  //   .exists()
-  //   .withMessage("Projects field is required")
-    // .isURL()
-    // .withMessage("Projects must be a valid url")
-  //   .not()
-  //   .isEmpty()
-  //   .withMessage("Projects cannot be empty"),
-
-  // check("certifications")
-  //   .exists()
-  //   .withMessage("Certifications field is required")
-    // .isURL()
-    // .withMessage("Certifications must be a valid url")
-//     .not()
-//     .isEmpty()
-//     .withMessage("Certifications cannot be empty"),
 
   (req: Request, res: Response, next: NextFunction) => {
     validateResult(req, res, next);

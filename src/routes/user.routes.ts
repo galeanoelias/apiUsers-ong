@@ -8,13 +8,11 @@ import { authUserValidator } from "../validations/register.validations";
 import { loginValidator } from "../validations/login.validations";
 import { requireToken } from "../middleware/tokenVerificator.middleware";
 import { requireRefreshToken } from "../middleware/refreshToken.middleware";
-//import { verifyFile } from "../middleware/cloudinary.validations";
-//import fileUpload from "express-fileupload";
-//import { uploadImg } from "../controller/cloudinary.controller";
+
 
 const userRoutes = Router();
 
-userRoutes.post("/register", authUserValidator, /*uploadImgfileUpload({ useTempFiles: true, tempFileDir: "../../public/uploads"}), verifyFile,*/ registerUser);
+userRoutes.post("/register", authUserValidator, registerUser);
 
 userRoutes.post("/login", loginValidator, loginUser);
 

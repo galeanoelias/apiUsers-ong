@@ -14,8 +14,6 @@ export const registerUser = async (req: Request, res: Response) => {
       password
     }
 
-    
-
     const user = await createUser(newUser);
 
     const tokenUser = generateToken(user.id);

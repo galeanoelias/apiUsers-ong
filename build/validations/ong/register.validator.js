@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.authUserValidator = void 0;
+exports.authOngValidator = void 0;
 const express_validator_1 = require("express-validator");
 const validateResult = (req, res, next) => {
     try {
@@ -12,8 +12,8 @@ const validateResult = (req, res, next) => {
         res.send({ errors: err.array() });
     }
 };
-//User register
-exports.authUserValidator = [
+//Ong register
+exports.authOngValidator = [
     (0, express_validator_1.check)("username")
         .exists()
         .withMessage("Username field is required")
@@ -24,20 +24,6 @@ exports.authUserValidator = [
         .not()
         .isEmpty()
         .withMessage("Username cannot be empty"),
-    (0, express_validator_1.check)("firstname")
-        .exists()
-        .withMessage("First name field is required")
-        .isLength({ min: 3 })
-        .withMessage("First name must have at least six (3) characters long")
-        .isLength({ max: 20 })
-        .withMessage("First name can't have more than twenty (20) characters"),
-    (0, express_validator_1.check)("lastname")
-        .exists()
-        .withMessage("Last name field is required")
-        .isLength({ min: 3 })
-        .withMessage("Last name must have at least six (3) characters long")
-        .isLength({ max: 20 })
-        .withMessage("Last name can't have more than twenty (20) characters"),
     (0, express_validator_1.check)("email")
         .exists()
         .withMessage("Email field is required")
@@ -64,9 +50,26 @@ exports.authUserValidator = [
         .not()
         .isEmpty()
         .withMessage("Password cannot be empty"),
-    //   check("avatar")
-    //     .exists()
-    //     .withMessage("Img field is required")
+    (0, express_validator_1.check)("website")
+        .exists()
+        .withMessage("About Me field is required")
+        .isLength({ min: 0 })
+        .withMessage("About Me must have at least six (0) characters long")
+        .isLength({ max: 50 })
+        .withMessage("About Me can't have more than twenty (350) characters"),
+    (0, express_validator_1.check)("telephone")
+        .exists()
+        .withMessage("About Me field is required")
+        .isLength({ min: 0 })
+        .withMessage("About Me must have at least six (0) characters long")
+        .isLength({ max: 20 })
+        .withMessage("About Me can't have more than twenty (350) characters")
+        .isStrongPassword({
+        minNumbers: 5
+    }),
+    //  check("photo")
+    //    .exists()
+    //    .withMessage("Img field is required")
     // .isURL()
     // .withMessage("Img must be a valid url")
     //   .not()
@@ -78,37 +81,11 @@ exports.authUserValidator = [
         .isLength({ min: 0 })
         .withMessage("About Me must have at least six (0) characters long")
         .isLength({ max: 350 })
-        .withMessage("About Me can't have more than twenty (350) characters"),
-    // check("cv")
-    //   .exists()
-    //   .withMessage("Cv field is required")
-    // .isURL()
-    // .withMessage("Cv must be a valid url")
-    //   .not()
-    //   .isEmpty()
-    //   .withMessage("Cv cannot be empty"),
-    (0, express_validator_1.check)("workfield")
-        .isIn(['Marketing', 'Tecnologia', 'Administracion', 'Unknown'])
-        .withMessage('Debe seleccionar un dato del listado'),
-    (0, express_validator_1.check)("workingmodality")
+        .withMessage("About Me can't have more than twenty (350) characters")
+        .withMessage("About Me cannot be empty"),
+    (0, express_validator_1.check)("ong_types")
         .isIn(['Presencial', 'Hibrido', 'Remoto', 'Unknown'])
         .withMessage('Debe seleccionar un dato del listado'),
-    // check("projects")
-    //   .exists()
-    //   .withMessage("Projects field is required")
-    // .isURL()
-    // .withMessage("Projects must be a valid url")
-    //   .not()
-    //   .isEmpty()
-    //   .withMessage("Projects cannot be empty"),
-    // check("certifications")
-    //   .exists()
-    //   .withMessage("Certifications field is required")
-    // .isURL()
-    // .withMessage("Certifications must be a valid url")
-    //     .not()
-    //     .isEmpty()
-    //     .withMessage("Certifications cannot be empty"),
     (req, res, next) => {
         validateResult(req, res, next);
     },
