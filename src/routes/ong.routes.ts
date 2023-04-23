@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { registerOng } from "../controller/ong/register.controller";
-import { loginOng } from "../controller/ong/login.controller";
+import { loginOngs } from "../controller/ong/login.controller";
 import { getOngById, getOngs } from "../controller/ong/find.controller";
 import { updateOngById } from "../controller/ong/update.controller";
 import { removeOng } from "../controller/ong/delete.controller";
@@ -11,7 +11,7 @@ const ongRoutes = Router();
 
 ongRoutes.post("/register", authOngValidator, registerOng);
 
-ongRoutes.post("/login", loginValidator, loginOng);
+ongRoutes.post("/login", loginValidator, loginOngs);
 
 ongRoutes.get("/", getOngs);
 
