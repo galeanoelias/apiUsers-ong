@@ -15,7 +15,8 @@ export const findById = async (id: string) => {
     const ong = await OngModel.findOne({ _id: id });
     if (!ong) return false
 
-    return ong;
+    const ongInfo = ong;
+    return ongInfo;
   } catch (err: any) {
     throw new Error(err);
   }

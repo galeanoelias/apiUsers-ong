@@ -16,7 +16,6 @@ export const getOngs = async (req: Request, res: Response) => {
 export const getOngById = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
-  
       const ong = await findById(id);
   
       return res.status(200).send(ong);

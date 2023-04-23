@@ -10,11 +10,6 @@ export const generateToken = (_id: string) => {
   }
 };
 
-export const validateToken = async (token: string) => {
-  const validate = jwt.verify(token, jwt_token);
-  return validate;
-};
-
 export const generateRefreshToken = (payload:{_id:string}, res: { cookie: (arg0: string, arg1: string, arg2: { httpOnly: boolean; secure: boolean; expires: Date; sameSite: string; }) => void; }) => {
   const expiresIn = 60 * 60 * 24 * 30;
   try {

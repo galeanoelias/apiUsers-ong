@@ -33,7 +33,7 @@ const options = {
             tags: [
               "User"
             ],
-            summary: "GET all userss in system",
+            summary: "GET all users in system",
             responses: {
               200: {
                 description: "Successful operation",
@@ -66,11 +66,6 @@ const options = {
         },
         "/auth/user/register": {
           post: {
-            security: [
-            {
-              bearerAuth: [""]
-            }
-            ],
             tags: [
               "User"
             ],
@@ -136,7 +131,7 @@ const options = {
           post: {
             security: [
               {
-                bearerAuth: [""]
+              api_key: [""]
               }
             ],
             tags: [
@@ -145,6 +140,15 @@ const options = {
             summary: "Login user",
             description: "User Logued",
             operationId: "loginUser",
+            parameters: [
+              {
+                name: "Authorization",
+                in: "header",
+                description: "Token",
+                required: true,
+                example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
+              }
+            ],
             requestBody: {
               required: true,
               content: {
@@ -227,13 +231,6 @@ const options = {
                 schema: {
                   type: String
                 }
-              },
-              {
-                name: "Authorization",
-                in: "header",
-                description: "Token",
-                required: true,
-                example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
               }
             ],
             responses: {
@@ -273,20 +270,13 @@ const options = {
             description: "This can only be done by the logged in user.",
             parameters: [
               {
-                in: "path",
                 name: "id",
-                description: "id that need to be update",
+                in: "path",
+                description: "The id that needs to be update",
                 required: true,
                 schema: {
                   type: String
                 }
-              },
-              {
-                name: "Authorization",
-                in: "header",
-                description: "Token",
-                required: true,
-                example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
               }
             ],
             requestBody: {
@@ -354,13 +344,6 @@ const options = {
                 schema: {
                   type: String
                 }
-              },
-              {
-                name: "Authorization",
-                in: "header",
-                description: "Token",
-                required: true,
-                example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
               }
             ],
             requestBody: {
@@ -462,11 +445,6 @@ const options = {
         },
         "/auth/ong/register": {
           post: {
-            security: [
-            {
-              bearerAuth: [""]
-            }
-            ],
             tags: [
               "Ong"
             ],
@@ -478,30 +456,22 @@ const options = {
               content: {
                 "application/json": {
                   schema: {
-                    $ref: "#/components/schemas/Ong/properties/username",
-                    $ref1: "#/components/schemas/Ong/properties/email",
-                    $ref2: "#/components/schemas/Ong/properties/password"
+                    $ref: "#/components/schemas/Ong"
                   }
                 },
                 "multipart/form-data": {
                   schema: {
-                    $ref: "#/components/schemas/Ong/properties/username",
-                    $ref1: "#/components/schemas/Ong/properties/email",
-                    $ref2: "#/components/schemas/Ong/properties/password"
+                    $ref: "#/components/schemas/Ong"
                   }
                 },
                 "application/xml": {
                   schema: {
-                    $ref: "#/components/schemas/Ong/properties/username",
-                    $ref1: "#/components/schemas/Ong/properties/email",
-                    $ref2: "#/components/schemas/Ong/properties/password"
+                    $ref: "#/components/schemas/Ong"
                   }
                 },
                 "application/x-www-form-urlencoded": {
                   schema: {
-                    $ref: "#/components/schemas/Ong/properties/username",
-                    $ref1: "#/components/schemas/Ong/properties/email",
-                    $ref2: "#/components/schemas/Ong/properties/password"
+                    $ref: "#/components/schemas/Ong"
                   }
                 }
               }
@@ -512,23 +482,17 @@ const options = {
                 content: {
                   "application/json": {
                     schema: {
-                      $ref: "#/components/schemas/Ong/properties/username",
-                      $ref1: "#/components/schemas/Ong/properties/email",
-                      $ref2: "#/components/schemas/Ong/properties/password"
+                      $ref: "#/components/schemas/Ong"
                     }
                   },
                   "multipart/form-data": {
                     schema: {
-                      $ref: "#/components/schemas/Ong/properties/username",
-                      $ref1: "#/components/schemas/Ong/properties/email",
-                      $ref2: "#/components/schemas/Ong/properties/password"
+                      $ref: "#/components/schemas/Ong"
                     }
                   },
                   "application/xml": {
                     schema: {
-                      $ref: "#/components/schemas/Ong/properties/username",
-                      $ref1: "#/components/schemas/Ong/properties/email",
-                      $ref2: "#/components/schemas/Ong/properties/password"
+                      $ref: "#/components/schemas/Ong"
                     }
                   }
                 }
@@ -546,7 +510,7 @@ const options = {
           post: {
             security: [
               {
-                bearerAuth: [""]
+              api_key: [""]
               }
             ],
             tags: [
@@ -555,31 +519,40 @@ const options = {
             summary: "Login Ong",
             description: "Ong Logued",
             operationId: "loginOng",
+            parameters: [
+              {
+                name: "Authorization",
+                in: "header",
+                description: "Token",
+                required: true,
+                example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
+              }
+            ],
             requestBody: {
               required: true,
               content: {
                 "application/json": {
                   schema: {
-                    $ref: "#/components/schemas/Ong/email",
-                    $ref1: "#/components/schemas/Ong/password"
+                    $ref: "#/components/schemas/Ong/properties/email",
+                    $ref1: "#/components/schemas/Ong/properties/password"
                   }
                 },
                 "multipart/form-data": {
                   schema: {
-                    $ref: "#/components/schemas/Ong/email",
-                    $ref1: "#/components/schemas/Ong/password"
+                    $ref: "#/components/schemas/Ong/properties/email",
+                    $ref1: "#/components/schemas/Ong/properties/password"
                   }
                 },
                 "application/xml": {
                   schema: {
-                    $ref: "#/components/schemas/Ong/email",
-                    $ref1: "#/components/schemas/Ong/password"
+                    $ref: "#/components/schemas/Ong/properties/email",
+                    $ref1: "#/components/schemas/Ong/properties/password"
                   }
                 },
                 "application/x-www-form-urlencoded": {
                   schema: {
-                    $ref: "#/components/schemas/Ong/email",
-                    $ref1: "#/components/schemas/Ong/password"
+                    $ref: "#/components/schemas/Ong/properties/email",
+                    $ref1: "#/components/schemas/Ong/properties/password"
                   }
                 }
               }
@@ -590,20 +563,20 @@ const options = {
                 content: {
                   "application/json": {
                     schema: {
-                      $ref: "#/components/schemas/Ong/email",
-                      $ref1: "#/components/schemas/Ong/password"
+                      $ref: "#/components/schemas/Ong/properties/email",
+                      $ref1: "#/components/schemas/Ong/properties/password"
                     }
                   },
                   "multipart/form-data": {
                     schema: {
-                      $ref: "#/components/schemas/Ong/email",
-                      $ref1: "#/components/schemas/Ong/password"
+                      $ref: "#/components/schemas/Ong/properties/email",
+                      $ref1: "#/components/schemas/Ong/properties/password"
                     }
                   },
                   "application/xml": {
                     schema: {
-                      $ref: "#/components/schemas/Ong/email",
-                      $ref1: "#/components/schemas/Ong/password"
+                      $ref: "#/components/schemas/Ong/properties/email",
+                      $ref1: "#/components/schemas/Ong/properties/password"
                     }
                   }
                 }
@@ -637,13 +610,6 @@ const options = {
                 schema: {
                   type: String
                 }
-              },
-              {
-                name: "Authorization",
-                in: "header",
-                description: "Token",
-                required: true,
-                example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
               }
             ],
             responses: {
@@ -690,13 +656,6 @@ const options = {
                 schema: {
                   type: String
                 }
-              },
-              {
-                name: "Authorization",
-                in: "header",
-                description: "Token",
-                required: true,
-                example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
               }
             ],
             requestBody: {
@@ -764,13 +723,6 @@ const options = {
                 schema: {
                   type: String
                 }
-              },
-              {
-                name: "Authorization",
-                in: "header",
-                description: "Token",
-                required: true,
-                example: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDQwNDJiYTZjMzEwZWZlMGMzMDcwMDAiLCJpYXQiOjE2ODE5MzI5ODYsImV4cCI6MTY4MTkzMzg4Nn0.ea2OM59KgdQKvZs8d2s3gTJfsx5A1kIiFOj7WGyeTvk"
               }
             ],
             requestBody: {

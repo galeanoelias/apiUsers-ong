@@ -1,27 +1,25 @@
 import { Router } from "express";
-import { registerUser } from "../controller/register.controller";
-import { loginUser } from "../controller/login.controller";
-import { getUserById, getUsers } from "../controller/find.controller";
-import { updateUserById } from "../controller/update.controller";
-import { removeUser } from "../controller/delete.controller";
-import { authUserValidator } from "../validations/register.validations";
-import { loginValidator } from "../validations/login.validations";
-import { requireToken } from "../middleware/tokenVerificator.middleware";
-import { requireRefreshToken } from "../middleware/refreshToken.middleware";
+import { registerUser } from "../controller/user/register.controller";
+import { loginUsers } from "../controller/user/login.controller";
+import { getUserById, getUsers } from "../controller/user/find.controller";
+import { updateUserById } from "../controller/user/update.controller";
+import { removeUser } from "../controller/user/delete.controller";
+import { authUserValidator } from "../validations/user/register.validations";
+import { loginValidator } from "../validations/user/login.validations";
 
 
 const userRoutes = Router();
 
 userRoutes.post("/register", authUserValidator, registerUser);
 
-userRoutes.post("/login", loginValidator, loginUser);
+userRoutes.post("/login", loginValidator, loginUsers);
 
 userRoutes.get("/", getUsers);
 
-userRoutes.get(":id", requireToken, getUserById);
+userRoutes.get("/:id", getUserById);
 
-userRoutes.put("/:id", requireRefreshToken, updateUserById);
+userRoutes.put("/:id", updateUserById);
 
-userRoutes.delete("/:id", requireRefreshToken, removeUser);
+userRoutes.delete("/:id", removeUser);
 
 export default userRoutes;

@@ -1,15 +1,15 @@
-import OngModel from "../../database/models/ong.models";
-import { Iong } from "../../interfaces/ong";
-import { Auth } from "../../interfaces/auth";
+import UserModel from "../../database/models/user.model";
+import { User } from "../../interfaces/user";
 import { hashPassword, comparePassword } from "../../utils/bcrypt.handle";
+import { Auth } from "../../interfaces/auth";
 import { generateToken } from "../../utils/jwt.handle";
 
 //funcion para crear un usuario en la bbdd
-export const createOng = async (input: Iong) => {
+export const createUser = async (input: User) => {
   try {
-    const ong = await OngModel.create(input);
+    const user = await UserModel.create(input);
 
-    return ong;
+    return user;
   } catch (err: any) {
     throw new Error(err);
   }
@@ -25,22 +25,22 @@ export const validatePassword = async ({
   password: string;
 }) => {
   //busco user por email
-  const ong = await OngModel.findOne({ email: email });
+  const user = await UserModel.findOne({ email: email });
 
-  if (!ong) return false;
+  if (!user) return false;
 
-  const validateOng = await hashPassword(password);
+  const validateUser = await hashPassword(password);
   //comparo pwd
-  const validate = await comparePassword(validateOng, ong.password);
+  const validate = await comparePassword(validateUser, user.password);
 
   if (!validate) return false;
 
-  return ong;
+  return user;
 };
 
-export const loginOng = async ({ email, password }: Auth) => {
-  const checkIs = await OngModel.findOne({ email });
-  if (!checkIs) return "NOT_FOUND_ONG";
+export const loginUser = async ({ email, password }: Auth) => {
+  const checkIs = await UserModel.findOne({ email });
+  if (!checkIs) return "NOT_FOUND_USER";
 
   const passwordHass = checkIs.password;
   const isCorrect = await comparePassword(password, passwordHass);

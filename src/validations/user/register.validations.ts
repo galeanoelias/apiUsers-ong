@@ -11,8 +11,8 @@ const validateResult = (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-//Ong register
-export const authOngValidator = [
+//User register
+export const authUserValidator = [
   check("username")
     .exists()
     .withMessage("Username field is required")
